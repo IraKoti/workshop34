@@ -1,6 +1,11 @@
-export interface countrycode {
-    Code: string,
-    Name: string
+export interface CountryCode {
+    code: string,
+    name: string
+}
+
+export interface category {
+    code: string,
+    name: string
 }
 
 export interface news {

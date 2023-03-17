@@ -1,14 +1,17 @@
-<table>
-    <tr>
-        <td align="right">Country :</td>
-        <td><select >
-            <option *ngFor="let country of countries">{{country.Name}}</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td align="right">Category :</td>
-        <td><select>
-            <option></option>
-        </select></td>
-    </tr>
-</table>
+<form [formGroup]="form">
+    <table>
+        <tr>
+            <td align="right">Country :</td>
+            <td><select formControlName="code">
+                <option ></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td align="right">Category :</td>
+            <td><select formControlName="category">
+                <option *ngFor="let c of categories" value="c">{{c | titlecase}}</option>
+            </select></td>
+        </tr>
+    </table>
+
+</form>

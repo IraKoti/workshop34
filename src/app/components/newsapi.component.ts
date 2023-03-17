@@ -1,5 +1,9 @@
-import { Component,Input } from '@angular/core';
-import { countrycode } from '../models'
+import { Component,Input, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { HttpClient } from '@angular/common/http'
+import { CountryCode } from '../models'
+import { NewsService } from '../news.service'
+import { NEWS_CATEGORIES } from '../constants'
 
 
 @Component({
@@ -7,9 +11,21 @@ import { countrycode } from '../models'
   templateUrl: './newsapi.component.html',
   styleUrls: ['./newsapi.component.css']
 })
-export class NewsapiComponent {
+export class NewsapiComponent implements OnInit{
+  @Input()
+ countried: CountryCode[] = []
+ categories = NEWS_CATEGORIES
+ form!: FormGroup
 
- @Input()
- countries!: countrycode[]
+ constructor (private fb: FormBuilder, private newssvc: NewsService) {}
 
+ 
+ 
+ ngOnInit(): void {
+  this.countried = this.newssvc.getCountryCode()
+  this.form = this.fb.group({
+    code: this.fb.control('',[Validators.required]),
+    category: this.fb.control ('',[Validators.required])
+  })
+ }
 }
